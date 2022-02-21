@@ -1,8 +1,9 @@
 <?= View::instance()->render('header.html') ?>
-<div id="topdiv">
- <?= Sc::go('/artifact','Listing') ?>
-</div>
-<div id="bottom">
+<nav class="cb-topbar">
+  <?= View::instance()->render('sidebar-resp.html') ?>
+  <?= Sc::go('/artifact','Listing') ?>
+</nav>
+<div class="cb-main">
 <h3><?=$page_head?> </h3>
 <?= isset($msg) ? '<div id="showmsg">'.$msg.'</div>' : '' ?>
 <?php if (is_array($accept_media)) $accept_media=implode(',',$accept_media); ?>

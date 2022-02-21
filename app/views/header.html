@@ -1,104 +1,16 @@
-<?php
-$sidebar_width = isset($sidebar_width) ? $sidebar_width : '150px';
-$topbar_height = isset($topbar_height) ? $topbar_height : '30px';
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
  <head>
   <title><?= $site ?></title>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="<?=Sc::url('/ui/imgs/cbase-16.png')?>">
-  <style type="text/css">
-/* Used for the FrameSet replacements */
-#container {
-    border: 1px solid black;
-    height: 300px;
-}
-
-#left {
-    /* border: 1px solid black; */
-    float: left;
-    width: <?=$sidebar_width?>;
-    height: 100%;
-    background-color: #f8f8f8;
-    font-family: arial, sans-serif;
-    font-size: 10pt;
-    font-weight: bold;
-    padding: 4px;
-    border: 1px solid #d0d0d0;
-    /* border-top: none; */
-    /* overflow-y: scroll; */
-}
-
-#right {
-    /* border: 1px solid grey; */
-    margin-left: <?=$sidebar_width?>;
-    height: 100%;
-}
-
-/* CSS for frameset like functionality */
-#topdiv {
-    background-color: #c0e0f0;
-    height: <?=$topbar_height?>
-    font-family: arial, sans-serif;
-    font-size: 10pt;
-    font-weight: bold;
-    padding: 4px;
-    border: 1px solid #d0d0d0;
-}
-#bottom {
-    height: 500px;
-    overflow-y: scroll;
-}
-
-  /* Show alternating colors on tables... */
-tr:nth-child(even) {
-    background-color: #D3D6FF;
-}
-tr:nth-child(odd) {
-    background-color: #D0F0F0;
-}
-th {
-    background-color: #F0F0F0;
-}
-
-/* Make sure that forms are aligned */
-
-form  { display: table;      }
-p     { display: table-row;  }
-label { display: table-cell; }
-input { display: table-cell; }
-
-
-/* Additional styles for Sorttable */
-table.sortable thead {
-    background-color:#eee;
-    color:#666666;
-    font-weight: bold;
-    cursor: default;
-}
-
-div {
-    font-family: arial, sans-serif;
-    font-size: 10pt;
-}
-
-  </style>
-  <?php
-    if (isset($x_css_inc)) {
-      foreach ($x_css_inc as $inc) {
-        echo '<link rel="stylesheet" href="'.$inc.'">';
-      }
-    }
-    if ($ui_scripts) {
-      foreach ($ui_scripts as $inc) {
-        echo '<script src="'.$inc.'"></script>';
-      }
-    }
-  ?>
+  <link rel="icon" href="<?=Sc::url($favico)?>" type="image/x-icon">
+  <link rel="stylesheet" href="<?= Sc::url('/ui/css/basic.css')?>">
  </head>
  <body>
- <div id="frameset">
-  <div id="left">
+ <div class="cb-container">
+  <nav id="sidebar" class="cb-sidebar">
+    <img src="<?= Sc::url($logo)?>"/>
     <h1><?= $site ?></h1>
     <?php if (defined('NONPROD')) { ?>
       <h2 style="color:red">NONPROD!</h2>
@@ -117,6 +29,5 @@ div {
       <?php if (isset($_SERVER['HTTP_REMOTE_USER'])) echo '<hr/>Remote User: '.$_SERVER['HTTP_REMOTE_USER']; ?>
       <hr/>
     </p>
-  </div>
-  <div id="right">
-   <div class="container">
+  </nav>
+  <div id="content" class="cb-content">

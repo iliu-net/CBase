@@ -1,9 +1,10 @@
 <?= View::instance()->render('header.html') ?>
 
-<div id="topdiv">
- <?= Sc::go('/category/create','Add New') ?>
-</div>
-<div id="main">
+<nav class="cb-topbar">
+  <?= View::instance()->render('sidebar-resp.html') ?>
+  <?= Sc::go('/category/create','Add New') ?>
+</nav>
+<div class="cb-main">
 <h3>Categories</h3>
 <?= isset($msg) ? '<div id="showmsg"><p>'.$msg.'</p></div>' : '' ?>
 
