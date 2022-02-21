@@ -1,0 +1,21 @@
+<?= View::instance()->render('header.html') ?>
+<div id="topdiv">
+ <?= Sc::go('/category','Listing') ?>
+</div>
+<div id="bottom">
+<h3><?=$page_head?> </h3>
+<?= isset($msg) ? '<div id="showmsg">'.$msg.'</div>' : '' ?>
+<?php if (is_array($accept_media)) $accept_media=implode(',',$accept_media); ?>
+
+<form action="<?= $form_action ?>" method="POST">
+ <p><?= Fm::text('name',['label'=>'Name:','maxlength'=>64]) ?></p>
+ <div class="control-group">
+   <input type="hidden" name="<?= $form_command ?>" value="<?= $form_command ?>"/>
+   <input type="submit" name="submit" value="<?= $form_label ?>"/>
+ </div>
+</form>
+
+
+</div>
+<?= View::instance()->render('footer.html') ?>
+

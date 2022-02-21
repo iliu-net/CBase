@@ -1,0 +1,35 @@
+<?= View::instance()->render('header.html') ?>
+
+<div id="topdiv">
+ <?= Sc::go('/category/create','Add New') ?>
+</div>
+<div id="main">
+<h3>Categories</h3>
+<?= isset($msg) ? '<div id="showmsg"><p>'.$msg.'</p></div>' : '' ?>
+
+<table>
+  <thead>
+  <tr>
+    <th>&nbsp;</th>
+    <th>id</th>
+    <th>category</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($categories as $row) { ?>
+    <tr>
+      <td>&nbsp;</td>
+      <td><?= $row['id'] ?></td>
+      <td><?= $row['name'] ?></td>
+      <td>
+	  <?= Sc::go('/category/update/'.$row['id'],'Edit') ?>
+	  <?= Sc::go('/category/delete/'.$row['id'],'Delete',['confirm'=>'Are you sure?']) ?>
+      </td>
+    </tr>
+    <?php } ?>
+  </tbody>
+</table>
+</div>
+
+<?= View::instance()->render('footer.html') ?>

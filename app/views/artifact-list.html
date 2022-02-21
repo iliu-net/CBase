@@ -1,0 +1,37 @@
+<?= View::instance()->render('header.html') ?>
+
+<div id="topdiv">
+ <?= Sc::go('/artifact/create','Add New') ?>
+</div>
+<div id="main">
+<h3>Artifacts</h3>
+<?= isset($msg) ? '<div id="showmsg"><p>'.$msg.'</p></div>' : '' ?>
+
+<table>
+  <thead>
+  <tr>
+    <th>&nbsp;</th>
+    <th>Document</th>
+    <th>Category</th>
+    <th>Type</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($artifacts as $row) { ?>
+    <tr>
+      <td><?= $row['id'] ?></td>
+      <td><?= $row['docName'] ?></td>
+      <td><?= $cats[$row['category']] ?> </td>
+      <td><?= $row['fileExtension'] ?></td>
+      <td>
+	  <?= Sc::go('/artifact/update/'.$row['id'],'Edit') ?>
+	  <?= Sc::go('/artifact/delete/'.$row['id'],'Delete',['confirm'=>'Are you sure?']) ?>
+      </td>
+    </tr>
+    <?php } ?>
+  </tbody>
+</table>
+</div>
+
+<?= View::instance()->render('footer.html') ?>
