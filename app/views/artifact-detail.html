@@ -6,7 +6,6 @@
 <div class="cb-main">
 <h3><?=$page_head?> </h3>
 <?= isset($msg) ? '<div id="showmsg">'.$msg.'</div>' : '' ?>
-<?php if (is_array($accept_media)) $accept_media=implode(',',$accept_media); ?>
 
 <form action="<?= $form_action ?>" method="POST" enctype="multipart/form-data">
  <p><?= Fm::text('docName',['label'=>'Name:','maxlength'=>64]) ?></p>
