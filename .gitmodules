@@ -1,6 +1,6 @@
-[submodule "submodules/fatfree"]
-	path = submodules/fatfree
-	url = https://github.com/bcosca/fatfree.git
 [submodule "submodules/my-gh-tools"]
 	path = submodules/my-gh-tools
 	url = https://github.com/TortugaLabs/my-gh-tools.git
+[submodule "submodules/fatfree-core"]
+	path = submodules/fatfree-core
+	url = https://github.com/bcosca/fatfree-core.git
