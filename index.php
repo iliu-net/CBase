@@ -1,5 +1,6 @@
 <?php
 date_default_timezone_set('UTC');
+require(__DIR__.'/vendor/autoload.php');
 
 if (php_sapi_name() == 'cli') {
   define('WORKING_DIR',getcwd());
@@ -21,16 +22,36 @@ if (isset($_SERVER['HTTP_X_FORWARDED_HOST'])) {
     }
   }
 }
-
-$f3=require('submodules/fatfree-core/base.php');
-$f3->config('config/config.ini');
-
-define('APPBASE',basename(dirname(realpath(__FILE__))));
-if (substr(APPBASE,-3) == 'Dev') {
-  define('NONPROD',1);
-  $f3->config('config/nonprod-config.ini');
+# Fixed issues with nginx...
+if (isset($_SERVER['SERVER_NAME']) && ($i = strpos($_SERVER['SERVER_NAME'], ':')) !== false) {
+  $_SERVER['SERVER_PORT'] = substr($_SERVER['SERVER_NAME'],$i+1);
+  $_SERVER['SERVER_NAME'] = substr($_SERVER['SERVER_NAME'],0,$i);
 }
 
-$f3->config($routes);
+$f3 = Base::instance();
+//~ $f3=require('vendor/bcosca/fatfree-core/base.php');
+$f3->config('config/config.ini');
 
+define('APPNAME',basename(dirname($_SERVER['SCRIPT_NAME'])));
+if (substr(APPNAME,-3) == 'Dev') {
+  define('NONPROD',1);
+  $f3->config('config/nonprod-config.ini', True);
+}
+$xcfg = implode('/',array_slice(explode('/',realpath(__FILE__)),0,3)) . '/config.ini';
+if (is_readable($xcfg)) $f3->config($xcfg);
+unset($xcfg);
+
+//~ # Replace config with env vars
+//~ $envvars = [];
+//~ foreach (getenv() as $k=>$v) {
+  //~ $envvars['${'.$k.'}'] = $v;
+//~ }
+//~ foreach (['db_dsn'] as $k) {
+  //~ if (!$f3->exists($k)) continue;
+  //~ $v = strtr($f3->get($k), $envvars);
+  //~ if ($v != $f3->get($k)) $f3->set($k,$v);
+//~ }
+//~ unset($envvars,$k,$v);
+
+$f3->config($routes);
 $f3->run();

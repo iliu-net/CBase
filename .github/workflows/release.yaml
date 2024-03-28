@@ -9,11 +9,15 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: prepare dependancies
+        run: |
+          sudo apt install -y composer
+          composer install
       - name: create full tarball
         run: |
           > artifacts.txt
           workdir=$(mktemp -d)
-          pname=pergamino
+          pname=CBase
           rc=0
           swrel=$(cat VERSION)
           tarball=$pname-$swrel.tar.gz
